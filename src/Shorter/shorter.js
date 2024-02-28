@@ -1,10 +1,16 @@
 const urls = [];
+let counter = 0;
 
 const generateShortUrl = (url) => {
-    return url.split('').reduce((acc, char) => {
-        const charCode = char.charCodeAt(0);
-        return acc + charCode;
-    }, 0).toString(36);
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:"<>?~`-=[]\;,./';
+    const charsLen = chars.length;
+    let result = '';
+    let num = counter++;
+    do {
+        result = chars[num % charsLen] + result;
+        num = Math.floor(num / charsLen);
+    } while (num > 0);
+    return result;
 };
 
 const shorter = (url) => {
