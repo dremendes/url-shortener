@@ -29,19 +29,15 @@ const getUrl = (shortUrl) => {
     return originalUrl.length > 0 ? originalUrl[0].url : false;
 };
 
-const get100MostVisited = () => {
-    return urls
-        .sort((a, b) => b.visits - a.visits)
-        .slice(0, 100);
-}
 
-const FUNCTIONS = { shorter, getUrl, generateShortUrl, get100MostVisited };
+
+const FUNCTIONS = { shorter, getUrl, generateShortUrl };
 
 module.exports = { 
     private: FUNCTIONS,
     public: {
         shorter,
         getUrl,
-        get100MostVisited
+        urls
     }
 };

@@ -1,5 +1,6 @@
 const express = require('express');
-const { shorter, getUrl, get100MostVisited } = require('./Shorter/shorter.js').public;
+const { shorter, getUrl, urls} = require('./Shorter/shorter.js').public;
+const { get100MostVisited } = require('./Stats/stats.js').public;
 const app = express();
 
 app.use(express.json());
@@ -13,7 +14,7 @@ app.post('/shorten', (req, res) => {
 
 //  curl -X GET http://localhost:3000/100mostVisited
 app.get('/100mostVisited', (req, res) => {
-    res.json(get100MostVisited());
+    res.json(get100MostVisited(urls));
 });
 
 // curl -X GET -L http://localhost:3000/1mw
