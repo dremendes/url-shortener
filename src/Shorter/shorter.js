@@ -40,10 +40,10 @@ const addTitleToUrl = (shortUrl, title) => {
 }
 
 
-const FUNCTIONS = { shorter, getUrl, generateShortUrl, addTitleToUrl };
+const FUNCTIONS_AND_DATA = { shorter, getUrl, generateShortUrl, addTitleToUrl, urls };
 
 module.exports = { 
-    private: FUNCTIONS,
+    private: FUNCTIONS_AND_DATA,
     public: {
         shorter,
         getUrl,
