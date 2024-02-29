@@ -18,10 +18,15 @@ const addTitlesJob = async () => {
                     console.error(`Error fetching title for ${key.url}: ${error.message}`);
                 });
             });
-            
+        
+        console.log(`TitlesJob: Fetching titles for ${titlelessPromises.length} titleless urls`);        
+        
         await Promise.all(titlelessPromises);
+        
+        console.log(`TitlesJob: Done for now.`);
     });
-    console.log('Titles adder Cron Job started!');
+
+    console.log('TitlesJob: Job started!');
 };
 
 module.exports = { 

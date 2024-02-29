@@ -2,6 +2,7 @@ const express = require('express');
 const { shorter, getUrl, urls} = require('./Shorter/shorter.js').public;
 const { get100MostVisited } = require('./Stats/stats.js').public;
 const { addTitlesJob } = require('./Jobs/jobs.js').public;
+const { populateDatabase } = require('./Bots/databasePopulator.js').public;
 const app = express();
 
 app.use(express.json());
@@ -31,5 +32,6 @@ app.get('/:shortUrl', (req, res) => {
 
 app.listen(3000, async () => {
     await addTitlesJob();
+    populateDatabase();
     console.log('Server running on port 3000');
 });
