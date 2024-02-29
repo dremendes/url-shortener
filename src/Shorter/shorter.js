@@ -2,7 +2,7 @@ const urls = new Map();
 let counter = 0;
 
 const generateShortUrl = () => {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:"<>?~`-=[]\;,./';
+    const chars = "abcdefghijklmnopqrstuvwxyz0123456789$-_.+!*'(),";
     const charsLen = chars.length;
     let result = '';
     let num = counter++;
