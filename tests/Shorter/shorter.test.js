@@ -1,4 +1,5 @@
-const { shorter, getUrl, addTitleToUrl } = require('../../src/Shorter/shorter.js').private;
+const { shorter, getUrl, addTitleToUrl, urls } = require('../../src/Shorter/shorter.js').private;
+const { get100MostVisited } = require('../../src/Stats/stats.js').public;
 
 describe('shorter', () => {
     it('should return a short url', () => {
@@ -33,9 +34,13 @@ describe('getUrl', () => {
 
 describe('addTitleToUrl', () => {
     it('should add a title to the url', () => {
-        const shortUrl = 'a';
+        const url = 'https://www.google.com';
+        const shortUrl = shorter(url);
         const title = 'Google';
-        const urlWithTitle = addTitleToUrl(shortUrl, title);
-        expect(urlWithTitle.title).toEqual('Google');
+
+        addTitleToUrl(shortUrl, title);
+        const result = get100MostVisited(urls);
+        const [ filtered ] = result.filter((item) => item[0] === shortUrl);
+        expect(filtered[1].title).toEqual('Google');
     });
 });
