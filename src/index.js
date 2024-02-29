@@ -1,6 +1,7 @@
 const express = require('express');
 const { shorter, getUrl, urls} = require('./Shorter/shorter.js').public;
 const { get100MostVisited } = require('./Stats/stats.js').public;
+const { addTitlesJob } = require('./Jobs/jobs.js').public;
 const app = express();
 
 app.use(express.json());
@@ -17,7 +18,7 @@ app.get('/100mostVisited', (req, res) => {
     res.json(get100MostVisited(urls));
 });
 
-// curl -X GET -L http://localhost:3000/1mw
+// curl -X GET -L http://localhost:3000/a
 app.get('/:shortUrl', (req, res) => {
     const { shortUrl } = req.params;
     const originalUrl = getUrl(shortUrl);
@@ -28,6 +29,7 @@ app.get('/:shortUrl', (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+app.listen(3000, async () => {
+    await addTitlesJob();
     console.log('Server running on port 3000');
 });

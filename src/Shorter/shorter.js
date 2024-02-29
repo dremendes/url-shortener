@@ -1,7 +1,7 @@
-const urls = [];
+const urls = new Map();
 let counter = 0;
 
-const generateShortUrl = (url) => {
+const generateShortUrl = () => {
     const chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:"<>?~`-=[]\;,./';
     const charsLen = chars.length;
     let result = '';
@@ -15,29 +15,39 @@ const generateShortUrl = (url) => {
 
 const shorter = (url) => {
     const shortUrl = generateShortUrl(url);
-    urls.push({ shortUrl, url, visits: 0});
+    urls.set(shortUrl, { url, shortUrl, visits: 0 });
     return shortUrl;
 };
 
 const getUrl = (shortUrl) => {
-    const originalUrl = urls.filter((url) => url.shortUrl === shortUrl);
+    const url = urls.get(shortUrl);
     
-    if (originalUrl.length > 0) {
-        originalUrl[0].visits++;
+    if (url) {
+        url.visits++;
     }
     
-    return originalUrl.length > 0 ? originalUrl[0].url : false;
+    return url?.url || false;
 };
 
+const addTitleToUrl = (shortUrl, title) => {
+    const foundUrl = urls.get(shortUrl);
+    
+    if (foundUrl) {
+        foundUrl.title = title;
+    }
+
+    return foundUrl;
+}
 
 
-const FUNCTIONS = { shorter, getUrl, generateShortUrl };
+const FUNCTIONS = { shorter, getUrl, generateShortUrl, addTitleToUrl };
 
 module.exports = { 
     private: FUNCTIONS,
     public: {
         shorter,
         getUrl,
+        addTitleToUrl,
         urls
     }
 };

@@ -1,7 +1,6 @@
 const get100MostVisited = (urls) => {
-    return urls
-        .sort((a, b) => b.visits - a.visits)
-        .slice(0, 100);
+    const sortedMap = [...urls.entries()].sort((a, b) => b[1].visits - a[1].visits).slice(0, 100);
+    return sortedMap;
 }
 
 const FUNCTIONS = { get100MostVisited };
